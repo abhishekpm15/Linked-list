@@ -1,0 +1,109 @@
+Rotate doubly Linked List
+Given a doubly-linked list, rotate the linked list counter-clockwise by P nodes. Here P is a given as a positive integer and is smaller than the count of nodes(N) in a linked list.
+
+Input:
+
+The first line of input contains an integer T denoting the number of test cases. For each test case, the first line of input contains two integers N and P. Where N denotes the number of nodes in the Linked List and P is the number of nodes that has to be rotated.
+
+Output:
+
+For each test case, the output should be the final linked list after P rotations.
+
+
+
+Constraints:
+
+1 <= T <= 100
+
+2 <= N <= 100
+
+1 <= P <= N
+
+
+
+Example:
+
+Input:
+
+1
+
+6 2
+
+1 2 3 4 5 6
+
+Output:
+
+3 4 5 6 1 2
+
+Explanation:
+
+Testcase 1: Doubly linked list after rotating 2 nodes is: 3 4 5 6 1 2.
+
+
+
+
+CODE:
+
+#include<iostream>
+using namespace std;
+struct Node{
+	int data;
+	Node* next;
+	Node* prev;
+}*head = NULL;
+
+void insert(int ele){
+	Node* temp=new Node;
+	temp->data = ele;
+	if(head==NULL){
+		temp->next=temp;
+		temp->prev=temp;
+		head=temp;
+		return;
+	}
+	else{
+		Node* temp2 = head;
+		while(temp2->next!=head){
+			temp2=temp2->next;
+		}
+		temp2->next=temp;
+		temp->prev=temp2;
+		temp->next=head;
+		head->prev=temp;
+	}
+}
+
+void display(int rot){
+	Node* temp = head;
+	while(rot>0){
+		temp=temp->next;
+		rot--;
+	}
+	head=temp;
+	do{
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+	while(temp!=head);
+}
+int main(){
+	int a;
+	cin>>a;
+	while(a>0){
+		int b,c;
+		cin>>b>>c;
+		while(b>0){
+			int d;
+			cin>>d;
+			insert(d);
+			b--;
+		}
+		display(c);
+		cout<<endl;
+		head=NULL;
+		a--;
+	}
+	
+}
+
+
