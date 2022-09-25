@@ -1,0 +1,97 @@
+Write a program to delete the second last element from the given Linked List. 
+If deletion of the second last element is not possible, then print "Deletion of second last element is not possible". 
+Otherwise, print the list after deleting the second last element.
+
+Format
+
+Input:
+
+The input consists of listed integers, a negative value indicates the end of the linked list.
+
+Output:
+
+The output should be the elements in a list separated by space.
+
+
+
+Example:
+
+Input:
+
+2
+
+4
+
+6
+
+8
+
+10
+
+-21
+
+Output:
+
+2 4 6 10
+
+
+CODE:
+
+#include<iostream>
+using namespace std;
+int count=0;
+struct Node{
+	int data;
+	Node* next;
+}*head=NULL;
+
+void insert(int ele){
+	Node* temp= new Node;
+	temp->data=ele;
+	if(head==NULL){
+		head=temp;
+		temp->next=NULL;
+		return ;
+	}
+	else{
+		Node* temp2=head;
+		while(temp2->next!=NULL){
+			temp2=temp2->next;
+		}
+		temp2->next=temp;
+		temp->next=NULL;
+	}
+}
+
+void del(int count){
+	int num=count-3;
+	Node* temp= head;
+	while(num>0){
+		temp=temp->next;
+		num--;
+	}
+	temp->next=temp->next->next;
+	Node* temp2=head;
+	while(temp2!=NULL){
+		cout<<temp2->data<<" ";
+		temp2=temp2->next;
+	}
+}
+int main(){
+	while(1){
+		int a;
+		cin>>a;
+		if(a<0){
+			break;
+		}
+		else{
+			insert(a);
+			count++;
+		}
+	}
+	if(count==0 || count==1){
+		cout<<"Deletion of second last element is not possible";
+		return 0;
+	}
+	del(count);
+}
