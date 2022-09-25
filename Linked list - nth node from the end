@@ -1,0 +1,98 @@
+Write a program to find the nth node of a list from the end. If there is no nth node, print "There is no nth node in the list". Otherwise, print the nth node element.
+
+
+Format:
+
+Input:
+
+The input should be a positive integer (until the user enters a negative value).
+
+The last line should be the value of an nth node.
+
+Output:
+
+The output should be the list of numbers in separate lines.
+
+Example:
+
+Input:
+
+1
+
+2
+
+3
+
+4
+
+-1
+
+2
+
+Output:
+
+Enter the nth node:
+
+3 is the nth node element in the list
+
+
+CODE:
+
+
+#include<iostream>
+using namespace std;
+int count=0;
+struct Node{
+	int data;
+	Node* next;
+}*head=NULL;
+
+void insert(int ele){
+	Node* temp = new Node;
+	temp->data = ele;
+	if(head==NULL){
+		temp->next=NULL;
+		head=temp;
+		return;
+	}
+	else{
+		Node* temp2 = head;
+		while(temp2->next!=NULL){
+			temp2=temp2->next;
+		}
+		temp2->next=temp;
+		temp->next=NULL;
+	}
+}
+
+void getNode(int pos){
+	int pos2 = count-pos;
+	Node* temp = head;
+	while(pos2 > 0){
+		temp=temp->next;
+		pos2--;
+	}
+	cout<<temp->data<<" is the nth node element in the list";
+}
+int main(){
+	int c;
+	while(1){
+		int a;
+		cin>>a;
+		if(a<0){
+			break;
+		}
+		else{
+			insert(a);
+			count++;
+		}
+	}
+	cout<<"Enter the nth node:\n";
+	cin>>c;
+	if(c>count){
+		cout<<"There is no nth node in the list";
+		return 0;
+	}
+	getNode(c);
+}
+
