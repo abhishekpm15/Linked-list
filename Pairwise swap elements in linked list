@@ -1,0 +1,110 @@
+Given a linked list, write a program to swap elements pairwise. If the list is empty, print "List is empty".
+
+
+
+Format:
+
+Input:
+
+The input consists of a list of integers, a negative value indicates the end of the linked list.
+
+Output:
+
+The output should be numbers in the list in separate lines.
+
+
+
+Example:
+
+Input:
+
+10
+
+20
+
+20
+
+10
+
+-30
+
+Output:
+
+20
+
+10
+
+10
+
+20
+
+
+CODE:
+
+#include<iostream>
+using namespace std;
+
+struct Node{
+	int data;
+	Node* next;
+}*head=NULL;
+
+void insert(int ele){
+	Node* temp = new Node;
+	temp->data = ele;
+	if(head==NULL){
+		temp->next=NULL;
+		head=temp;
+		return;
+	}
+	else{
+		Node* temp2 = head;
+		while(temp2->next!=NULL){
+			temp2=temp2->next;
+		}
+		temp2->next=temp;
+		temp->next=NULL;
+	}
+}
+
+void swap(){
+	Node* end = head;
+	Node* prev = end->next;
+	int flag5=0;
+	while(prev!=NULL){
+		
+		int flag =  prev->data;
+		prev->data = end->data;
+		end->data = flag;
+		if(prev->next==NULL){
+			break;
+		}
+		end=prev->next;
+		prev=end->next;
+	}
+	Node* temp3 = head;
+	while(temp3!=NULL){
+		cout<<temp3->data<<"\n";
+		temp3=temp3->next;
+	}
+}
+int main(){
+  int flag=0;
+	while(1){
+		int a;
+		cin>>a;
+		if(a<0){
+			break;
+		}
+		else{
+			insert(a);
+          	flag=1;
+		}
+	}
+  if(flag==0){
+    cout<<"List is empty";
+    return 0;
+  }
+	swap();
+	
+}
